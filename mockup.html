@@ -1,37 +1,37 @@
 <title>차곡 🌰 — 디자인 시안</title>
 <style>
   :root{
-    --cream:#FCF7F0;        /* 바탕 */
+    --cream:#FFF8EA;        /* 바탕 — 밝은 크림 */
     --card:#FFFFFF;
-    --card-sub:#F6EDE2;
-    --ink:#3D2B1C;
+    --card-sub:#FFF0D4;
+    --ink:#3D2B1C;          /* 글씨 — 검정 대신 도토리 갈색 */
     --ink-soft:#8C7358;
-    --hair:#E7DCCD;         /* 연한 구분선 — 대부분 여기 */
+    --hair:#EFE0C6;         /* 연한 구분선 — 대부분 여기 */
     --line:#3D2B1C;         /* 진한 테두리 — 강조에만 */
-    --nut:#E58A3C;
-    --nut-deep:#C26A22;
-    --nut-tint:#FBEBDA;
-    --leaf:#7FB069;
-    --good:#7FB069;
-    --soso:#E5B44A;
-    --oops:#EE9B7C;
+    --nut:#FFC93C;          /* 도토리 노랑 — 강조. 밝아서 위에 갈색 글씨가 잘 읽힘 */
+    --nut-deep:#A8760A;     /* 작은 글씨 강조 (충분히 어둡게) */
+    --nut-tint:#FFF3D6;
+    --sky:#96D8EC;          /* 보조 — 노랑과 멀어서 상큼 */
+    --good:#6BC47F;
+    --soso:#FFC93C;
+    --oops:#FF9E7A;
     --frame:#FFFFFF;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --cream:#211913; --card:#2C221A; --card-sub:#3A2C21;
-      --ink:#F5E7D6; --ink-soft:#B49B7E; --hair:#453529;
-      --line:#F0DCC4; --nut:#E58A3C; --nut-deep:#B85F1C; --nut-tint:#3E2C1D;
-      --leaf:#6FA357; --good:#6FA357; --soso:#D6A63F; --oops:#DE8A6B;
-      --frame:#2C221A;
+      --cream:#241E14; --card:#312A1E; --card-sub:#3F3626;
+      --ink:#FFF3D6; --ink-soft:#B8A483; --hair:#473C2A;
+      --line:#FFE9B8; --nut:#FFC93C; --nut-deep:#F5C651; --nut-tint:#3D3423;
+      --sky:#5FA8BE; --good:#6BC47F; --soso:#FFC93C; --oops:#FF9E7A;
+      --frame:#312A1E;
     }
   }
   :root[data-theme="dark"]{
-    --cream:#211913; --card:#2C221A; --card-sub:#3A2C21;
-    --ink:#F5E7D6; --ink-soft:#B49B7E; --hair:#453529;
-    --line:#F0DCC4; --nut:#E58A3C; --nut-deep:#B85F1C; --nut-tint:#3E2C1D;
-    --leaf:#6FA357; --good:#6FA357; --soso:#D6A63F; --oops:#DE8A6B;
-    --frame:#2C221A;
+    --cream:#241E14; --card:#312A1E; --card-sub:#3F3626;
+    --ink:#FFF3D6; --ink-soft:#B8A483; --hair:#473C2A;
+    --line:#FFE9B8; --nut:#FFC93C; --nut-deep:#F5C651; --nut-tint:#3D3423;
+    --sky:#5FA8BE; --good:#6BC47F; --soso:#FFC93C; --oops:#FF9E7A;
+    --frame:#312A1E;
   }
 
   *{box-sizing:border-box}
@@ -80,7 +80,7 @@
   }
   .pill:hover{transform:translateY(-1px);box-shadow:0 3px 0 var(--line)}
   .pill:active{transform:translateY(2px);box-shadow:0 0 0 var(--line)}
-  .pill:focus-visible{outline:3px solid var(--leaf);outline-offset:3px}
+  .pill:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
   .pill.ghost{background:transparent;border-color:var(--hair);color:var(--ink);box-shadow:none}
 
   .seg{display:flex;gap:2px;align-items:center;flex-wrap:wrap}
@@ -89,7 +89,7 @@
     min-height:38px;padding:0 13px;border-radius:999px;cursor:pointer;transition:color .12s ease;
   }
   .seg button:hover{color:var(--ink)}
-  .seg button:focus-visible{outline:2px solid var(--leaf);outline-offset:2px}
+  .seg button:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
   .seg button.on{background:var(--nut);color:#3D2B1C;font-weight:800}
 
   /* ── 폰 ── */
@@ -145,7 +145,7 @@
   .ex .xh .cv{font-size:13px;color:var(--ink-soft);flex-shrink:0}
 
   .vidline{display:flex;align-items:center;gap:9px;margin:0 13px 10px;background:var(--card-sub);border-radius:10px;padding:6px 9px;cursor:pointer}
-  .vidline .thumb{width:38px;height:26px;flex-shrink:0;border-radius:5px;background:linear-gradient(135deg,#D9C6AE,var(--leaf));display:grid;place-items:center;font-size:10px;color:#fff}
+  .vidline .thumb{width:38px;height:26px;flex-shrink:0;border-radius:5px;background:linear-gradient(135deg,#FFE3AE,var(--sky));display:grid;place-items:center;font-size:10px;color:#fff}
   .vidline .t{min-width:0;flex:1}
   .vidline .t b{display:block;font-size:11.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .vidline .t span{display:block;font-size:10px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
@@ -169,7 +169,7 @@
   .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .vcard{border:1px solid var(--hair);border-radius:12px;background:var(--card);overflow:hidden;cursor:pointer;display:flex;flex-direction:column}
   .vcard:hover{border-color:var(--ink-soft)}
-  .vcard .th{aspect-ratio:16/10;background:linear-gradient(135deg,#D9C6AE,var(--leaf));display:grid;place-items:center;font-size:15px;position:relative;color:#fff}
+  .vcard .th{aspect-ratio:16/10;background:linear-gradient(135deg,#FFE3AE,var(--sky));display:grid;place-items:center;font-size:15px;position:relative;color:#fff}
   .vcard .th .dur{position:absolute;right:5px;bottom:5px;background:rgba(61,43,28,.78);border-radius:99px;font-size:9px;font-weight:700;padding:2px 7px;font-variant-numeric:tabular-nums;color:#fff}
   .vcard .nm2{padding:8px 9px 0;font-size:12px;font-weight:700;line-height:1.35}
   .vcard .sub2{padding:2px 9px 9px;font-size:10px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
@@ -177,7 +177,7 @@
   .vcard.add .th{background:var(--card-sub);color:var(--ink-soft);font-size:19px}
 
   /* 펼친 영상 */
-  .video{position:relative;border-radius:14px;background:linear-gradient(135deg,#D9C6AE,var(--leaf));aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden}
+  .video{position:relative;border-radius:14px;background:linear-gradient(135deg,#FFE3AE,var(--sky));aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden}
   .video .big{width:48px;height:48px;border-radius:999px;background:rgba(255,255,255,.92);display:grid;place-items:center;font-size:17px;color:var(--ink)}
   .clip{position:absolute;left:9px;bottom:9px;background:rgba(61,43,28,.78);border-radius:999px;font-size:11px;font-weight:700;padding:3px 10px;font-variant-numeric:tabular-nums;color:#fff}
   .more{position:absolute;top:9px;right:9px;width:28px;height:28px;border-radius:999px;background:rgba(255,255,255,.92);border:0;display:grid;place-items:center;font-weight:800;font-size:14px;color:var(--ink);cursor:pointer}
@@ -199,7 +199,7 @@
   /* 눈바디 */
   .collage{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
   .shot{border-radius:10px;aspect-ratio:3/4;background:var(--card-sub);display:grid;place-items:center;font-size:11px;color:var(--ink-soft);font-weight:600;position:relative;overflow:hidden}
-  .shot::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44%;height:62%;border-radius:44% 44% 8% 8%;background:var(--leaf);opacity:.42}
+  .shot::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44%;height:62%;border-radius:44% 44% 8% 8%;background:var(--sky);opacity:.42}
   .shot.new::after{width:39%;height:66%}
   .rowlabel{font-size:11px;font-weight:700;color:var(--ink-soft);font-variant-numeric:tabular-nums}
   .diff{text-align:center;font-weight:800;font-size:15px}
@@ -254,18 +254,18 @@
   <header>
     <div class="logo-row">
       <svg class="mascot" width="72" height="72" viewBox="0 0 100 100" role="img" aria-label="차곡 다람쥐">
-        <path d="M74 74 q22 -6 18 -28 q-4 -22 -22 -18 q14 6 12 20 q-2 14 -14 18z" fill="#E58A3C" stroke="#3D2B1C" stroke-width="3.5" stroke-linejoin="round"/>
-        <ellipse cx="47" cy="70" rx="26" ry="22" fill="#E58A3C" stroke="#3D2B1C" stroke-width="3.5"/>
-        <ellipse cx="47" cy="74" rx="14" ry="14" fill="#FCF7F0" stroke="#3D2B1C" stroke-width="2.5"/>
-        <path d="M32 26 q-3 -12 6 -13 q5 5 4 13z" fill="#E58A3C" stroke="#3D2B1C" stroke-width="3" stroke-linejoin="round"/>
-        <path d="M62 26 q3 -12 -6 -13 q-5 5 -4 13z" fill="#E58A3C" stroke="#3D2B1C" stroke-width="3" stroke-linejoin="round"/>
-        <circle cx="47" cy="38" r="20" fill="#E58A3C" stroke="#3D2B1C" stroke-width="3.5"/>
-        <circle cx="31" cy="44" r="8" fill="#F3A868" stroke="#3D2B1C" stroke-width="2.5"/>
-        <circle cx="63" cy="44" r="8" fill="#F3A868" stroke="#3D2B1C" stroke-width="2.5"/>
+        <path d="M74 74 q22 -6 18 -28 q-4 -22 -22 -18 q14 6 12 20 q-2 14 -14 18z" fill="#FFB84D" stroke="#3D2B1C" stroke-width="3.5" stroke-linejoin="round"/>
+        <ellipse cx="47" cy="70" rx="26" ry="22" fill="#FFB84D" stroke="#3D2B1C" stroke-width="3.5"/>
+        <ellipse cx="47" cy="74" rx="14" ry="14" fill="#FFF8EA" stroke="#3D2B1C" stroke-width="2.5"/>
+        <path d="M32 26 q-3 -12 6 -13 q5 5 4 13z" fill="#FFB84D" stroke="#3D2B1C" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M62 26 q3 -12 -6 -13 q-5 5 -4 13z" fill="#FFB84D" stroke="#3D2B1C" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="47" cy="38" r="20" fill="#FFB84D" stroke="#3D2B1C" stroke-width="3.5"/>
+        <circle cx="31" cy="44" r="8" fill="#FFD08A" stroke="#3D2B1C" stroke-width="2.5"/>
+        <circle cx="63" cy="44" r="8" fill="#FFD08A" stroke="#3D2B1C" stroke-width="2.5"/>
         <circle cx="41" cy="36" r="3" fill="#3D2B1C"/><circle cx="53" cy="36" r="3" fill="#3D2B1C"/>
         <path d="M44 43 l6 0 l-3 4z" fill="#3D2B1C"/>
-        <ellipse cx="76" cy="86" rx="8.5" ry="9.5" fill="#FCF7F0" stroke="#3D2B1C" stroke-width="3"/>
-        <path d="M67.5 80.5 q8.5 -6.5 17 0z" fill="#C26A22" stroke="#3D2B1C" stroke-width="3" stroke-linejoin="round"/>
+        <ellipse cx="76" cy="86" rx="8.5" ry="9.5" fill="#FFF8EA" stroke="#3D2B1C" stroke-width="3"/>
+        <path d="M67.5 80.5 q8.5 -6.5 17 0z" fill="#C98A2A" stroke="#3D2B1C" stroke-width="3" stroke-linejoin="round"/>
       </svg>
       <h1 class="wordmark">차곡</h1>
     </div>
@@ -306,19 +306,22 @@
   <!-- 팔레트 -->
   <section class="rise">
     <h2>Color</h2>
-    <p class="sec-title">도토리 주황 · 크림 · 잎 초록</p>
+    <p class="sec-title">도토리 노랑 · 크림 · 연한 하늘</p>
     <div class="palette">
-      <div class="sw"><div class="chip" style="background:#E58A3C"></div><div class="meta"><b>도토리 주황</b><span class="hex">#E58A3C</span> · 강조 하나만</div></div>
-      <div class="sw"><div class="chip" style="background:#C26A22"></div><div class="meta"><b>진한 도토리</b><span class="hex">#C26A22</span> · 작은 글씨 강조</div></div>
-      <div class="sw"><div class="chip" style="background:#FCF7F0"></div><div class="meta"><b>크림</b><span class="hex">#FCF7F0</span> · 바탕</div></div>
-      <div class="sw"><div class="chip" style="background:#E7DCCD"></div><div class="meta"><b>연한 선</b><span class="hex">#E7DCCD</span> · 구분선 대부분</div></div>
+      <div class="sw"><div class="chip" style="background:#FFC93C"></div><div class="meta"><b>도토리 노랑</b><span class="hex">#FFC93C</span> · 강조 하나만</div></div>
+      <div class="sw"><div class="chip" style="background:#96D8EC"></div><div class="meta"><b>연한 하늘</b><span class="hex">#96D8EC</span> · 보조 (노랑과 멀어서 상큼)</div></div>
+      <div class="sw"><div class="chip" style="background:#FFF8EA"></div><div class="meta"><b>크림</b><span class="hex">#FFF8EA</span> · 바탕</div></div>
+      <div class="sw"><div class="chip" style="background:#EFE0C6"></div><div class="meta"><b>연한 선</b><span class="hex">#EFE0C6</span> · 구분선 대부분</div></div>
       <div class="sw"><div class="chip" style="background:#3D2B1C"></div><div class="meta"><b>도토리 갈색</b><span class="hex">#3D2B1C</span> · 글씨 (검정 아님)</div></div>
-      <div class="sw"><div class="chip" style="background:linear-gradient(90deg,#7FB069 33%,#E5B44A 33% 66%,#EE9B7C 66%)"></div><div class="meta"><b>굿 · 낫뱃 · 배드</b><span class="hex">식단 판정 전용</span></div></div>
+      <div class="sw"><div class="chip" style="background:linear-gradient(90deg,#6BC47F 33%,#FFC93C 33% 66%,#FF9E7A 66%)"></div><div class="meta"><b>굿 · 낫뱃 · 배드</b><span class="hex">식단 판정 전용</span></div></div>
     </div>
     <div class="note">
       <b>테두리와 그림자도 「강조」에만 씁니다.</b> (2026-08-10 수정 — 우경님: <i>"디자인 너무 정신없어 보이는데"</i>)<br>
       처음엔 카드·알약·스테퍼·썸네일 전부에 굵은 테두리와 그림자를 줬더니 <b>뭐가 중요한지 구분이 안 됐어요.</b>
       지금은 <b>주요 버튼 · 지금 고른 것 · 오늘 할 루틴</b> 세 가지만 진하고, 나머지는 연한 선 하나로 구분합니다.<br>
+      <b>강조색을 주황에서 노랑으로 되돌렸습니다.</b> (2026-08-10 — 우경님: <i>"삐약짐이 귀엽긴 했네, 가독성도 좋고. 컬러 차이인 듯"</i>)<br>
+      도토리 주황 <code>#E58A3C</code> 은 <b>명도가 낮아</b> 그 위의 갈색 글씨와 대비가 약했고, 갈색과 같은 계열이라 탁해 보였어요.
+      노랑 <code>#FFC93C</code> 은 밝아서 <b>갈색 글씨가 또렷하게</b> 읽히고, 보조색 하늘과 멀어서 상큼합니다. 도토리도 원래 황토·노란빛이에요.<br>
       <b>왜 검정 대신 도토리 갈색인가</b> — 순수 검정은 딱딱하고 심각해 보여요. 갈색이 섞이면 같은 대비인데 부드러워요.<br>
       <b>왜 배드가 빨강이 아닌 살구색인가</b> — 밥 사진에 빨간 경고를 띄우면 혼나는 기분이 들어요.
     </div>
@@ -337,10 +340,10 @@
           <div class="pbody">
             <div class="hi">
               <svg width="32" height="32" viewBox="0 0 100 100" aria-hidden="true">
-                <ellipse cx="47" cy="70" rx="26" ry="22" fill="#E58A3C" stroke="#3D2B1C" stroke-width="4"/>
-                <circle cx="47" cy="38" r="20" fill="#E58A3C" stroke="#3D2B1C" stroke-width="4"/>
-                <circle cx="31" cy="44" r="8" fill="#F3A868" stroke="#3D2B1C" stroke-width="3"/>
-                <circle cx="63" cy="44" r="8" fill="#F3A868" stroke="#3D2B1C" stroke-width="3"/>
+                <ellipse cx="47" cy="70" rx="26" ry="22" fill="#FFB84D" stroke="#3D2B1C" stroke-width="4"/>
+                <circle cx="47" cy="38" r="20" fill="#FFB84D" stroke="#3D2B1C" stroke-width="4"/>
+                <circle cx="31" cy="44" r="8" fill="#FFD08A" stroke="#3D2B1C" stroke-width="3"/>
+                <circle cx="63" cy="44" r="8" fill="#FFD08A" stroke="#3D2B1C" stroke-width="3"/>
                 <circle cx="41" cy="36" r="3.2" fill="#3D2B1C"/><circle cx="53" cy="36" r="3.2" fill="#3D2B1C"/>
               </svg>
               <div><h3>오늘도 차곡차곡</h3><p class="jarline">도토리 <b>12</b>개 모았어요</p></div>
