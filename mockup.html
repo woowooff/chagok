@@ -50,7 +50,7 @@
   .tag b{color:var(--ink);font-weight:700}
 
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-  .mascot{animation:bob 3.4s ease-in-out infinite;flex-shrink:0}
+  .mascot{animation:bob 3.4s ease-in-out infinite;flex-shrink:0;font-size:52px;line-height:1;letter-spacing:-4px}
   @media (prefers-reduced-motion:reduce){.mascot{animation:none}}
 
   section{margin-top:72px}
@@ -277,20 +277,7 @@
 
   <header>
     <div class="logo-row">
-      <svg class="mascot" width="72" height="72" viewBox="0 0 100 100" role="img" aria-label="차곡 다람쥐">
-        <path d="M74 74 q22 -6 18 -28 q-4 -22 -22 -18 q14 6 12 20 q-2 14 -14 18z" fill="#FFB84D" stroke="#3D2B1C" stroke-width="3.5" stroke-linejoin="round"/>
-        <ellipse cx="47" cy="70" rx="26" ry="22" fill="#FFB84D" stroke="#3D2B1C" stroke-width="3.5"/>
-        <ellipse cx="47" cy="74" rx="14" ry="14" fill="#FFF8EA" stroke="#3D2B1C" stroke-width="2.5"/>
-        <path d="M32 26 q-3 -12 6 -13 q5 5 4 13z" fill="#FFB84D" stroke="#3D2B1C" stroke-width="3" stroke-linejoin="round"/>
-        <path d="M62 26 q3 -12 -6 -13 q-5 5 -4 13z" fill="#FFB84D" stroke="#3D2B1C" stroke-width="3" stroke-linejoin="round"/>
-        <circle cx="47" cy="38" r="20" fill="#FFB84D" stroke="#3D2B1C" stroke-width="3.5"/>
-        <circle cx="31" cy="44" r="8" fill="#FFD08A" stroke="#3D2B1C" stroke-width="2.5"/>
-        <circle cx="63" cy="44" r="8" fill="#FFD08A" stroke="#3D2B1C" stroke-width="2.5"/>
-        <circle cx="41" cy="36" r="3" fill="#3D2B1C"/><circle cx="53" cy="36" r="3" fill="#3D2B1C"/>
-        <path d="M44 43 l6 0 l-3 4z" fill="#3D2B1C"/>
-        <ellipse cx="76" cy="86" rx="8.5" ry="9.5" fill="#FFF8EA" stroke="#3D2B1C" stroke-width="3"/>
-        <path d="M67.5 80.5 q8.5 -6.5 17 0z" fill="#C98A2A" stroke="#3D2B1C" stroke-width="3" stroke-linejoin="round"/>
-      </svg>
+      <span class="mascot" role="img" aria-label="차곡 다람쥐와 도토리">🐿️🌰</span>
       <h1 class="wordmark">차곡</h1>
     </div>
     <p class="tag">
@@ -363,13 +350,7 @@
           <div class="notch"><i></i></div>
           <div class="pbody">
             <div class="hi">
-              <svg width="32" height="32" viewBox="0 0 100 100" aria-hidden="true">
-                <ellipse cx="47" cy="70" rx="26" ry="22" fill="#FFB84D" stroke="#3D2B1C" stroke-width="4"/>
-                <circle cx="47" cy="38" r="20" fill="#FFB84D" stroke="#3D2B1C" stroke-width="4"/>
-                <circle cx="31" cy="44" r="8" fill="#FFD08A" stroke="#3D2B1C" stroke-width="3"/>
-                <circle cx="63" cy="44" r="8" fill="#FFD08A" stroke="#3D2B1C" stroke-width="3"/>
-                <circle cx="41" cy="36" r="3.2" fill="#3D2B1C"/><circle cx="53" cy="36" r="3.2" fill="#3D2B1C"/>
-              </svg>
+              <span style="font-size:26px;line-height:1" aria-hidden="true">🐿️</span>
               <div><h3>오늘도 차곡차곡</h3><p class="jarline">도토리 <b>12</b>개 모았어요</p></div>
             </div>
 
