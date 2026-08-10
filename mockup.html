@@ -238,6 +238,27 @@
     color:#3A2E1F;font:inherit;font-weight:900;font-size:14px;padding:10px;cursor:pointer;
   }
   .addset:hover{background:var(--yolk-deep)}
+  /* 스트레칭 — 영상이 주인공인 격자 목록 */
+  .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .vcard{
+    border:3px solid var(--line);border-radius:14px;background:var(--card);
+    box-shadow:3px 3px 0 var(--shadow);overflow:hidden;cursor:pointer;
+    display:flex;flex-direction:column;
+  }
+  .vcard .th{
+    aspect-ratio:16/10;border-bottom:2px solid var(--line);
+    background:linear-gradient(135deg,var(--card-sub),var(--sky));
+    display:grid;place-items:center;font-size:15px;position:relative;
+  }
+  .vcard .th .dur{
+    position:absolute;right:4px;bottom:4px;background:var(--card);
+    border:2px solid var(--line);border-radius:99px;
+    font-size:9px;font-weight:900;padding:1px 6px;font-variant-numeric:tabular-nums;color:var(--ink);
+  }
+  .vcard .nm2{padding:6px 8px;font-size:11.5px;font-weight:800;line-height:1.35}
+  .vcard .sub2{padding:0 8px 7px;font-size:10px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  .vcard.add .th{background:transparent;border-bottom-style:dashed;color:var(--ink-soft);font-size:20px}
+
   /* 접힌 영상 한 줄 */
   .vidline{
     display:flex;align-items:center;gap:9px;
@@ -411,7 +432,7 @@
   <!-- 화면 -->
   <section class="rise">
     <h2>Screens</h2>
-    <p class="sec-title">화면 5개 — 전부 2번 안에 도착합니다</p>
+    <p class="sec-title">화면 6개 — 전부 2번 안에 도착합니다</p>
     <div class="screens">
 
       <!-- 1. 홈 -->
@@ -504,7 +525,50 @@
         <p class="cap"><b>② 운동 상세 — 기록이 주인공</b><b>영상은 한 줄로 접혀 있어요.</b> 기구 사용법은 이미 아니까 매번 볼 필요가 없죠. 누르면 펼쳐지고 <b>3:20~4:05만</b> 재생되고 멈춰요.<br>2·3세트는 <b>1세트 값이 미리 채워져</b> 있어서 ✓만 누르면 끝</p>
       </div>
 
-      <!-- 3. 식단 -->
+      <!-- 2-2. 스트레칭 보관함 -->
+      <div class="screen">
+        <div class="phone">
+          <div class="notch"><i></i></div>
+          <div class="body">
+            <div class="hi"><div><h3>스트레칭</h3><p>저장해둔 영상 5개</p></div></div>
+            <div class="seg">
+              <button>엉덩이</button><button>하체</button>
+              <button>코어</button><button class="on">스트레칭</button>
+            </div>
+            <div class="vgrid">
+              <div class="vcard">
+                <div class="th">▶<span class="dur">0:30</span></div>
+                <div class="nm2">골반교정</div>
+                <div class="sub2">소미핏 · 어제 함</div>
+              </div>
+              <div class="vcard">
+                <div class="th">▶<span class="dur">1:20</span></div>
+                <div class="nm2">등·어깨 풀기</div>
+                <div class="sub2">썽이핏 · 8/6</div>
+              </div>
+              <div class="vcard">
+                <div class="th">▶<span class="dur">0:45</span></div>
+                <div class="nm2">햄스트링 늘리기</div>
+                <div class="sub2">제이제이 · 8/5</div>
+              </div>
+              <div class="vcard add">
+                <div class="th">＋</div>
+                <div class="nm2">영상 추가</div>
+                <div class="sub2">링크 붙여넣기</div>
+              </div>
+            </div>
+            <div class="tabs">
+              <div class="on"><span>🏋️</span>운동</div>
+              <div><span>🍚</span>식단</div>
+              <div><span>📸</span>눈바디</div>
+              <div><span>📅</span>기록</div>
+            </div>
+          </div>
+        </div>
+        <p class="cap"><b>③ 스트레칭 — 보관함</b>여기선 <b>영상이 주인공</b>이에요. 여러 개 저장해두고 그날 <b>필요한 걸 골라서</b> 씁니다. 근력운동과 정반대죠</p>
+      </div>
+
+      <!-- 4. 식단 -->
       <div class="screen">
         <div class="phone">
           <div class="notch"><i></i></div>
@@ -529,7 +593,7 @@
             </div>
           </div>
         </div>
-        <p class="cap"><b>③ 식단 — 사진 한 장이면 끝</b>칼로리 숫자는 <b>안 보여줍니다.</b> 병아리 표정 🐣😐🥲 세 개로만.<br><b>「아침·점심·저녁」을 안 씁니다</b> — 사진 찍은 시각이 자동으로 들어가요</p>
+        <p class="cap"><b>④ 식단 — 사진 한 장이면 끝</b>칼로리 숫자는 <b>안 보여줍니다.</b> 병아리 표정 🐣😐🥲 세 개로만.<br><b>「아침·점심·저녁」을 안 씁니다</b> — 사진 찍은 시각이 자동으로 들어가요</p>
       </div>
 
       <!-- 4. 눈바디 -->
@@ -560,7 +624,7 @@
             </div>
           </div>
         </div>
-        <p class="cap"><b>④ 눈바디 — 1개월 콜라주 비교</b>기본값이 <b>1달</b>. 첫날↔오늘을 앞·옆·뒤 6칸으로. 찍을 때 <b>지난 사진이 흐리게 겹쳐 보여서</b> 매번 같은 각도로 찍혀요</p>
+        <p class="cap"><b>⑤ 눈바디 — 1개월 콜라주 비교</b>기본값이 <b>1달</b>. 첫날↔오늘을 앞·옆·뒤 6칸으로. 찍을 때 <b>지난 사진이 흐리게 겹쳐 보여서</b> 매번 같은 각도로 찍혀요</p>
       </div>
 
       <!-- 5. 기록 -->
@@ -610,7 +674,7 @@
             </div>
           </div>
         </div>
-        <p class="cap"><b>⑤ 기록 — 달력 하나로 전부</b>날짜를 누르면 <b>그날 한 걸 한꺼번에</b>. 점 색으로 뭘 했는지 한눈에 보여요</p>
+        <p class="cap"><b>⑥ 기록 — 달력 하나로 전부</b>날짜를 누르면 <b>그날 한 걸 한꺼번에</b>. 점 색으로 뭘 했는지 한눈에 보여요</p>
       </div>
 
     </div>
