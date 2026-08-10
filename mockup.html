@@ -238,6 +238,22 @@
     color:#3A2E1F;font:inherit;font-weight:900;font-size:14px;padding:10px;cursor:pointer;
   }
   .addset:hover{background:var(--yolk-deep)}
+  /* 접힌 영상 한 줄 */
+  .vidline{
+    display:flex;align-items:center;gap:9px;
+    background:var(--card);border:3px solid var(--line);border-radius:14px;
+    padding:7px 10px;box-shadow:3px 3px 0 var(--shadow);cursor:pointer;
+  }
+  .vidline .thumb{
+    width:46px;height:32px;flex-shrink:0;border-radius:7px;border:2px solid var(--line);
+    background:linear-gradient(135deg,var(--card-sub),var(--sky));
+    display:grid;place-items:center;font-size:11px;
+  }
+  .vidline .t{min-width:0;flex:1}
+  .vidline .t b{display:block;font-size:12.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .vidline .t span{display:block;font-size:11px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  .vidline .caret{font-size:14px;color:var(--ink-soft);font-weight:900;flex-shrink:0}
+
   /* 영상 위 더보기 */
   .more{
     position:absolute;top:8px;right:8px;width:30px;height:30px;
@@ -413,19 +429,23 @@
               <div><h3>오늘도 삐약!</h3><p>이번 주 3일째예요</p></div>
             </div>
             <div class="seg">
-              <button class="on">가슴</button><button>등</button>
-              <button>하체</button><button>엉덩이</button>
+              <button class="on">엉덩이</button><button>하체</button>
+              <button>코어</button><button>스트레칭</button>
             </div>
             <div class="card ex">
-              <div><div class="nm">벤치프레스</div><div class="sub">지난번 · 8/8 · 60kg × 10 × 3</div></div>
+              <div><div class="nm">힙 쓰러스트</div><div class="sub">지난번 · 8/8 · 40kg × 12 × 3</div></div>
               <div class="play">▶</div>
             </div>
             <div class="card ex">
-              <div><div class="nm">인클라인 덤벨</div><div class="sub">지난번 · 8/5 · 14kg × 12 × 3</div></div>
+              <div><div class="nm">사이드 킥백</div><div class="sub">지난번 · 8/8 · 15회 × 3</div></div>
               <div class="play">▶</div>
             </div>
             <div class="card ex">
-              <div><div class="nm">케이블 플라이</div><div class="sub">아직 안 해봤어요</div></div>
+              <div><div class="nm">골반교정 스트레칭</div><div class="sub">지난번 · 8/5 · 30초 × 3</div></div>
+              <div class="play">▶</div>
+            </div>
+            <div class="card ex">
+              <div><div class="nm">클램쉘</div><div class="sub">아직 안 해봤어요</div></div>
               <div class="play empty">＋</div>
             </div>
             <div class="tabs">
@@ -444,25 +464,30 @@
         <div class="phone">
           <div class="notch"><i></i></div>
           <div class="body">
-            <div class="hi"><div><h3>벤치프레스</h3><p>지난번 · 60kg × 10 × 3</p></div></div>
-            <div class="video">
-              <div class="big">▶</div>
-              <div class="clip">⏱ 3:20 → 4:05</div>
-              <button class="more" aria-label="영상 교체·구간 다시 정하기">⋯</button>
-              <div class="bar"><span></span></div>
+            <div class="hi"><div><h3>힙 쓰러스트</h3><p>지난번 · 40kg × 12 × 3</p></div></div>
+            <div class="vidline" role="button" tabindex="0">
+              <div class="thumb">▶</div>
+              <div class="t"><b>핏주부 · 윗쪽 엉덩이 황금동작 4가지</b><span>⏱ 3:20 → 4:05</span></div>
+              <div class="caret">⌄</div>
             </div>
             <div class="sets">
               <div class="head"><span>세트</span><span>무게 · 횟수</span></div>
               <div class="setline">
                 <div class="setno">1</div>
-                <div class="stepper"><button aria-label="무게 줄이기">−</button><div class="val">60kg</div><button aria-label="무게 늘리기">＋</button></div>
-                <div class="stepper reps"><button aria-label="횟수 줄이기">−</button><div class="val">10</div><button aria-label="횟수 늘리기">＋</button></div>
+                <div class="stepper"><button aria-label="무게 줄이기">−</button><div class="val">40kg</div><button aria-label="무게 늘리기">＋</button></div>
+                <div class="stepper reps"><button aria-label="횟수 줄이기">−</button><div class="val">12</div><button aria-label="횟수 늘리기">＋</button></div>
                 <div class="check">✓</div>
               </div>
               <div class="setline">
                 <div class="setno">2</div>
-                <div class="stepper"><button aria-label="무게 줄이기">−</button><div class="val">60kg</div><button aria-label="무게 늘리기">＋</button></div>
-                <div class="stepper reps"><button aria-label="횟수 줄이기">−</button><div class="val">10</div><button aria-label="횟수 늘리기">＋</button></div>
+                <div class="stepper"><button aria-label="무게 줄이기">−</button><div class="val">40kg</div><button aria-label="무게 늘리기">＋</button></div>
+                <div class="stepper reps"><button aria-label="횟수 줄이기">−</button><div class="val">12</div><button aria-label="횟수 늘리기">＋</button></div>
+                <div class="check">✓</div>
+              </div>
+              <div class="setline">
+                <div class="setno">3</div>
+                <div class="stepper"><button aria-label="무게 줄이기">−</button><div class="val">40kg</div><button aria-label="무게 늘리기">＋</button></div>
+                <div class="stepper reps"><button aria-label="횟수 줄이기">−</button><div class="val">12</div><button aria-label="횟수 늘리기">＋</button></div>
                 <div class="check off">✓</div>
               </div>
               <button class="addset">＋ 세트 추가</button>
@@ -476,7 +501,7 @@
             </div>
           </div>
         </div>
-        <p class="cap"><b>② 운동 상세 — 영상 + 기록</b>영상은 <b>3:20~4:05만</b> 재생되고 멈춰요. 2세트는 <b>1세트 값이 미리 채워져</b> 있어서 ✓만 누르면 끝</p>
+        <p class="cap"><b>② 운동 상세 — 기록이 주인공</b><b>영상은 한 줄로 접혀 있어요.</b> 기구 사용법은 이미 아니까 매번 볼 필요가 없죠. 누르면 펼쳐지고 <b>3:20~4:05만</b> 재생되고 멈춰요.<br>2·3세트는 <b>1세트 값이 미리 채워져</b> 있어서 ✓만 누르면 끝</p>
       </div>
 
       <!-- 3. 식단 -->
@@ -573,7 +598,7 @@
             </div>
             <div class="card day">
               <div class="dtitle">8월 3일 (일)</div>
-              <div class="drow"><span class="ic">🏋️</span><span class="txt"><b>벤치프레스</b> 60kg × 10 × 3<br><b>인클라인 덤벨</b> 14kg × 12 × 3</span></div>
+              <div class="drow"><span class="ic">🏋️</span><span class="txt"><b>힙 쓰러스트</b> 40kg × 12 × 3<br><b>사이드 킥백</b> 15회 × 3<br><b>골반교정 스트레칭</b> 30초 × 3</span></div>
               <div class="drow"><span class="ic">🍚</span><span class="txt" style="font-variant-numeric:tabular-nums">08:20 <b>굿</b> · 12:30 <b>낫뱃</b> · 19:10 <b>굿</b></span></div>
               <div class="drow"><span class="ic">📸</span><span class="txt">눈바디 3장 (앞·옆·뒤)</span></div>
             </div>
@@ -599,8 +624,30 @@
       <div>
         <div class="rowlabel" style="margin-bottom:8px">고르는 줄 — <b>고른 것만</b> 알약, 나머지는 그냥 글자</div>
         <div class="seg">
-          <button class="on">가슴</button><button>등</button><button>어깨</button>
-          <button>하체</button><button>엉덩이</button><button>코어</button>
+          <button class="on">엉덩이</button><button>하체</button><button>코어</button>
+          <button>등</button><button>어깨</button><button>가슴</button><button>스트레칭</button>
+        </div>
+      </div>
+      <div>
+        <div class="rowlabel" style="margin-bottom:8px">영상 — <b>평소엔 접혀 있고</b>, 누르면 펼쳐집니다</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;max-width:520px">
+          <div>
+            <div class="vidline" role="button" tabindex="0">
+              <div class="thumb">▶</div>
+              <div class="t"><b>핏주부 · 힙업 4가지</b><span>⏱ 3:20 → 4:05</span></div>
+              <div class="caret">⌄</div>
+            </div>
+            <p style="margin:6px 0 0;font-size:11px;color:var(--ink-soft)">접힌 상태 — 기본</p>
+          </div>
+          <div>
+            <div class="video">
+              <div class="big">▶</div>
+              <div class="clip">⏱ 3:20 → 4:05</div>
+              <button class="more" aria-label="영상 교체·구간 다시 정하기">⋯</button>
+              <div class="bar"><span></span></div>
+            </div>
+            <p style="margin:6px 0 0;font-size:11px;color:var(--ink-soft)">펼친 상태 — 4:05에서 자동으로 멈춤</p>
+          </div>
         </div>
       </div>
       <div>
@@ -611,13 +658,27 @@
         </div>
       </div>
       <div>
-        <div class="rowlabel" style="margin-bottom:8px">무게·횟수 — 눌러서 2.5kg / 1회씩</div>
-        <div class="pillrow">
-          <div class="stepper"><button aria-label="줄이기">−</button><div class="val">60kg</div><button aria-label="늘리기">＋</button></div>
-          <div class="stepper reps"><button aria-label="줄이기">−</button><div class="val">10</div><button aria-label="늘리기">＋</button></div>
-          <span style="font-size:13px;color:var(--ink-soft)">숫자를 직접 누르면 그때만 키보드</span>
+        <div class="rowlabel" style="margin-bottom:8px">기록 방식 — <b>운동마다 3가지 중 하나.</b> 한 번 정하면 다시 안 물어봐요</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <div class="pillrow">
+            <span class="badge" style="background:var(--yolk)">무게 × 횟수</span>
+            <div class="stepper"><button aria-label="줄이기">−</button><div class="val">40kg</div><button aria-label="늘리기">＋</button></div>
+            <div class="stepper reps"><button aria-label="줄이기">−</button><div class="val">12</div><button aria-label="늘리기">＋</button></div>
+            <span style="font-size:12px;color:var(--ink-soft)">힙 쓰러스트 · 스쿼트 (기구)</span>
+          </div>
+          <div class="pillrow">
+            <span class="badge" style="background:var(--sky)">횟수만</span>
+            <div class="stepper reps"><button aria-label="줄이기">−</button><div class="val">15</div><button aria-label="늘리기">＋</button></div>
+            <span style="font-size:12px;color:var(--ink-soft)">사이드 킥백 · 클램쉘 (맨몸)</span>
+          </div>
+          <div class="pillrow">
+            <span class="badge" style="background:var(--good)">시간</span>
+            <div class="stepper"><button aria-label="줄이기">−</button><div class="val">30초</div><button aria-label="늘리기">＋</button></div>
+            <span style="font-size:12px;color:var(--ink-soft)">골반교정 · 플랭크 · 스트레칭</span>
+          </div>
         </div>
       </div>
+      <p style="margin:0;font-size:13px;color:var(--ink-soft)">숫자를 직접 누르면 그때만 키보드가 올라와요</p>
       <div>
         <div class="rowlabel" style="margin-bottom:8px">판정 배지 — 결과를 보여줄 때만</div>
         <div class="pillrow">
