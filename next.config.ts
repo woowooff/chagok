@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // 화면 구석에 뜨는 까만 「N」 동그라미를 끈다 (2026-08-11 우경님 요청).
+  // 우리가 만든 게 아니라 Next.js가 개발 중에만 띄우는 개발자 도구 버튼이고,
+  // 인터넷에 올린 진짜 앱에는 원래 안 나온다. 폰에서 손가락에 걸려서 껐다.
+  // ⚠️ 꺼도 오류는 그대로 화면에 표시된다.
+  devIndicators: false,
+
   // 폰에서 열려면 이게 있어야 한다 (2026-08-11).
   //
   // Next.js는 개발 중일 때 localhost 말고 다른 주소로 들어오는 요청을 기본으로 막는다.
