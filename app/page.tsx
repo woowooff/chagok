@@ -14,6 +14,9 @@ export default function HomePage() {
   const routines = [...state.routines].sort((a, b) => a.order - b.order);
   const todayStr = today();
   const todayId = pickTodayRoutineId(routines, todayStr);
+  const stretchCount = state.exercises.filter(
+    (e) => e.part === "스트레칭" && e.video
+  ).length;
 
   return (
     <>
@@ -72,6 +75,19 @@ export default function HomePage() {
 
       <Link href="/routine/new" className="add-routine">
         ＋ 루틴 만들기
+      </Link>
+
+      {/* FN-07 스트레칭은 루틴이 아니라 보관함이다. 그래서 목록 밖, 맨 아래 한 줄 */}
+      <Link href="/stretch" className="stretch-row">
+        <span className="t">
+          <b>스트레칭</b>
+          <span>
+            {stretchCount > 0
+              ? `저장해둔 영상 ${stretchCount}개 · 골라서`
+              : "영상을 저장해두고 골라서 보기"}
+          </span>
+        </span>
+        <span className="go">›</span>
       </Link>
     </>
   );
