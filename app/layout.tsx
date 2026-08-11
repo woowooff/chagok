@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Jua } from "next/font/google";
 import TabBar from "@/components/TabBar";
+import { ChagokProvider } from "@/lib/chagok-store";
 import "./globals.css";
 
 // 주아체 — 배달의민족이 무료로 푼 둥글둥글한 글씨체 (PRD 0장)
@@ -27,8 +28,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ko" className={jua.variable}>
       <body>
-        <div className="app">{children}</div>
-        <TabBar />
+        <ChagokProvider>
+          <div className="app">{children}</div>
+          <TabBar />
+        </ChagokProvider>
       </body>
     </html>
   );

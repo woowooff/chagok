@@ -1,17 +1,19 @@
-// 홈 = 루틴 목록 (FN-01). M0에서는 인사와 도토리 개수까지만 — 목록은 M1(T-10)에서.
+// T-10 홈 = 루틴 목록 (FN-01~06)
+// 화면에서 진한 건 「오늘 할 루틴」 하나뿐이다 (NFR-12)
 "use client";
 
-import { useEffect, useState } from "react";
-import { loadState } from "@/lib/storage";
-import type { ChagokState } from "@/lib/types";
+import Link from "next/link";
+import { useChagok } from "@/lib/chagok-store";
+import { pickTodayRoutineId, routineSummary } from "@/lib/logic";
+import { today } from "@/lib/storage";
 
 export default function HomePage() {
-  // 저장된 값은 브라우저에만 있으므로 화면이 뜬 뒤에 읽는다
-  const [state, setState] = useState<ChagokState | null>(null);
-  useEffect(() => setState(loadState()), []);
+  const { state } = useChagok();
+  const acorns = state.settings.acorns;
 
-  const acorns = state?.settings.acorns ?? 0;
-  const routines = state?.routines ?? [];
+  const routines = [...state.routines].sort((a, b) => a.order - b.order);
+  const todayStr = today();
+  const todayId = pickTodayRoutineId(routines, todayStr);
 
   return (
     <>
@@ -46,8 +48,31 @@ export default function HomePage() {
           헬스장에서 한 번만 누르면 됩니다.
         </p>
       ) : (
-        <div className="stub">루틴 목록은 M1에서 만듭니다 (T-10)</div>
+        <ul className="rt-list">
+          {routines.map((r) => {
+            const isToday = r.id === todayId;
+            const doneToday = r.lastDoneAt === todayStr;
+            return (
+              <li key={r.id}>
+                <Link
+                  href={`/routine/${encodeURIComponent(r.id)}`}
+                  className={`rt ${isToday ? "today" : ""}`}
+                >
+                  <span className="t">
+                    <b>{r.name}</b>
+                    <span>{routineSummary(r)}</span>
+                  </span>
+                  <span className="go">{doneToday ? "✓ 오늘 완료" : "›"}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       )}
+
+      <Link href="/routine/new" className="add-routine">
+        ＋ 루틴 만들기
+      </Link>
     </>
   );
 }

@@ -66,6 +66,8 @@ export type SetRecord = {
   reps: number | null;
   sec: number | null;
   done: boolean;
+  /** 신기록이면 어떤 메달인지 (FN-35b). 체크할 때 계산해서 박아둔다 */
+  medal?: "weight" | "volume" | null;
 };
 
 /** 루틴 1회 = 도토리 1개 (FN-33) */

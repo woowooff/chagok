@@ -170,7 +170,7 @@ a {
   margin-bottom: 10px;
 }
 
-/* 아직 안 만든 화면임을 표시하는 자리표 (M0에서만 쓴다) */
+/* 아직 안 만든 화면임을 표시하는 자리표 */
 .stub {
   border: 1px dashed var(--hair);
   border-radius: var(--r);
@@ -178,4 +178,567 @@ a {
   text-align: center;
   color: var(--ink-faint);
   font-size: 13px;
+}
+
+.hint {
+  margin: 14px 2px 0;
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  line-height: 1.7;
+}
+
+/* ── 위쪽 제목줄 ───────────────────────────── */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.topbar button {
+  width: var(--tap);
+  height: var(--tap);
+  margin-left: -12px;
+  border: none;
+  background: none;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.topbar b {
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.topbar .sub {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+/* ── 홈: 루틴 목록 (FN-02) ─────────────────── */
+/* 진한 건 「오늘 할 루틴」 하나뿐. 나머지는 연한 선 1px, 그림자 없음 */
+
+.rt-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 11px 14px;
+  border: 1px solid var(--hair);
+  border-radius: var(--r);
+  background: var(--card);
+}
+
+.rt.today {
+  background: var(--nut);
+  border: 2px solid var(--ink);
+  box-shadow: 0 2px 0 rgba(61, 43, 28, 0.12);
+}
+
+.rt .t {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+
+.rt .t b {
+  font-weight: 400;
+  font-size: 17px;
+}
+
+.rt .t span {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.rt.today .t span {
+  color: #6b5233;
+}
+
+.rt .go {
+  font-size: 13px;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+}
+
+.rt.today .go {
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.add-routine,
+.add-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px dashed var(--hair);
+  border-radius: var(--r);
+  background: none;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  width: 100%;
+}
+
+.add-row.small {
+  min-height: 40px;
+  margin-top: 8px;
+  font-size: 13.5px;
+}
+
+/* ── 루틴 만들기: 담은 운동 순서 ───────────── */
+
+.pick-order {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pick-order li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--hair);
+  border-radius: 10px;
+  background: var(--card);
+}
+
+.pick-order .grip {
+  color: var(--ink-faint);
+  cursor: grab;
+}
+
+.pick-order .nm {
+  flex: 1;
+  min-width: 0;
+  font-size: 14.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pick-order button {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: none;
+  color: var(--ink-soft);
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+/* ── 루틴 실행: 운동 목록 ──────────────────── */
+
+.ex-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* 접힌 항목은 박스로 만들지 않는다. 그냥 줄 (PRD 3-1) */
+.ex-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  padding: 8px 4px;
+  border: none;
+  border-bottom: 1px solid var(--hair);
+  background: none;
+  text-align: left;
+}
+
+.ex.open {
+  border: 2px solid var(--ink);
+  border-radius: var(--r);
+  background: var(--card);
+  padding: 4px 12px 12px;
+  margin: 6px 0;
+}
+
+.ex.open .ex-head {
+  border-bottom: 1px solid var(--hair);
+}
+
+.ex-head .no {
+  width: 22px;
+  font-size: 13px;
+  color: var(--ink-faint);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.ex-head .nm {
+  flex: 1;
+  min-width: 0;
+  font-size: 15.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ex-head .cnt {
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.ex-head .cnt.ok {
+  color: var(--good);
+}
+
+.ex-head .chev {
+  width: 16px;
+  color: var(--ink-faint);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.ex-body {
+  padding-top: 10px;
+}
+
+.ex-body .last {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+/* ── 세트 한 줄 ────────────────────────────── */
+
+.set {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 5px 0;
+}
+
+.set .setno {
+  width: 18px;
+  font-size: 13px;
+  color: var(--ink-faint);
+  flex-shrink: 0;
+}
+
+.set.done .setno {
+  color: var(--good);
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: var(--card);
+  overflow: hidden;
+}
+
+.stepper button {
+  width: var(--tap);
+  height: 40px;
+  border: none;
+  background: none;
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+.stepper button:active {
+  background: var(--cream);
+}
+
+.stepper .stepper-value {
+  min-width: 62px;
+  width: auto;
+  height: 40px;
+  font-size: 15px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  border-left: 1px solid var(--hair);
+  border-right: 1px solid var(--hair);
+}
+
+.stepper .stepper-value .unit {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  margin-left: 2px;
+}
+
+.stepper-input {
+  width: 62px;
+  height: 40px;
+  border: none;
+  border-left: 1px solid var(--hair);
+  border-right: 1px solid var(--hair);
+  text-align: center;
+  font-size: 15px;
+  background: var(--cream);
+}
+
+.check {
+  width: var(--tap);
+  height: 40px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink-faint);
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.check.on {
+  background: var(--good);
+  border-color: var(--good);
+  color: #fff;
+}
+
+.medal {
+  font-size: 12px;
+  color: var(--nut-deep);
+  width: 100%;
+  padding-left: 26px;
+}
+
+/* ── 아래 고정 주요 버튼 (화면당 1개) ──────── */
+
+.bottom-cta {
+  margin-top: 22px;
+}
+
+.primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--nut);
+  color: var(--ink);
+  font-size: 16.5px;
+  box-shadow: 0 2px 0 rgba(61, 43, 28, 0.15);
+}
+
+.primary:disabled {
+  background: var(--card);
+  border-color: var(--hair);
+  color: var(--ink-faint);
+  box-shadow: none;
+}
+
+.primary.as-btn {
+  margin-top: 26px;
+  text-decoration: none;
+}
+
+/* ── 끝낸 뒤 화면 ──────────────────────────── */
+
+.done-card {
+  text-align: center;
+  padding-top: 64px;
+}
+
+.done-card .big {
+  font-size: 58px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.done-card h1 {
+  margin: 0;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.done-card .sub {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+.medal-summary {
+  margin-top: 26px;
+  padding: 14px 16px;
+  border: 1px solid var(--hair);
+  border-radius: var(--r);
+  background: var(--card);
+  text-align: left;
+  font-size: 14px;
+}
+
+.medal-summary b {
+  font-weight: 400;
+  color: var(--nut-deep);
+}
+
+.medal-summary ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+/* ── 운동 추가 시트 ────────────────────────── */
+
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  max-width: var(--app-w);
+  margin: 0 auto;
+  background: var(--cream);
+  padding: 16px 18px calc(24px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.sheet-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.sheet-head b {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.sheet-head .x {
+  margin-left: auto;
+  width: var(--tap);
+  height: var(--tap);
+  border: none;
+  background: none;
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+.search {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 10px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--card);
+  font-size: 15.5px;
+}
+
+.search::placeholder {
+  color: var(--ink-faint);
+}
+
+/* 알약 — 고른 것만 노랑, 나머지는 색 없는 그냥 글자 (PRD 3-2) */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.pill {
+  min-height: 36px;
+  padding: 6px 14px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.pill.on {
+  background: var(--nut);
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.picklist {
+  display: flex;
+  flex-direction: column;
+}
+
+.pick-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: var(--tap);
+  padding: 10px 4px;
+  border: none;
+  border-bottom: 1px solid var(--hair);
+  background: none;
+  text-align: left;
+}
+
+.pick-row .nm {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+}
+
+/* ⚠️ 여기 클래스 이름은 .rt(루틴 카드)와 겹치면 안 된다 — 겹쳐서 네모가 생긴 적 있음 */
+.pick-row .mark {
+  font-size: 13px;
+  color: var(--ink-faint);
+  flex-shrink: 0;
+}
+
+.pick-row.already {
+  color: var(--ink-faint);
+}
+
+.make-row {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 10px 4px;
+  border: none;
+  border-bottom: 1px solid var(--hair);
+  background: none;
+  text-align: left;
+  font-size: 15px;
+  color: var(--nut-deep);
+}
+
+.make-form {
+  padding: 10px 4px 16px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.make-label {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-top: 6px;
+}
+
+.picknone {
+  margin: 22px 0;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--ink-faint);
 }
