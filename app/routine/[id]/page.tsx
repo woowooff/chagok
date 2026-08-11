@@ -13,6 +13,8 @@ import { useParams, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import ExercisePicker from "@/components/ExercisePicker";
 import Stepper from "@/components/Stepper";
+import VideoPicker from "@/components/VideoPicker";
+import VideoRow from "@/components/VideoRow";
 import { useChagok } from "@/lib/chagok-store";
 import {
   fmtDuration,
@@ -23,7 +25,7 @@ import {
   medalLabel,
 } from "@/lib/logic";
 import { newId, today } from "@/lib/storage";
-import type { Exercise, Session, SetRecord } from "@/lib/types";
+import type { Exercise, Session, SetRecord, Video } from "@/lib/types";
 
 export default function RoutineRunPage() {
   const params = useParams<{ id: string }>();
@@ -36,6 +38,8 @@ export default function RoutineRunPage() {
   const [openId, setOpenId] = useState<string | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [finished, setFinished] = useState<Session | null>(null);
+  // 영상을 붙이거나 고칠 운동
+  const [videoFor, setVideoFor] = useState<Exercise | null>(null);
 
   // 오늘 이 루틴의 진행 중인 세션 (끝내기 전까지 endedAt이 비어 있다)
   const session = useMemo(
@@ -202,6 +206,17 @@ export default function RoutineRunPage() {
     });
   }
 
+  /** 영상은 운동에 붙는다 — 한 번 붙이면 그 운동을 쓰는 모든 루틴에서 보인다 */
+  function saveVideo(exerciseId: string, video: Video | null) {
+    update((s) => ({
+      ...s,
+      exercises: s.exercises.map((e) =>
+        e.id === exerciseId ? { ...e, video } : e
+      ),
+    }));
+    setVideoFor(null);
+  }
+
   function addExercise(exerciseId: string) {
     update((s) => ({
       ...s,
@@ -330,6 +345,9 @@ export default function RoutineRunPage() {
 
               {open && (
                 <div className="ex-body">
+                  {/* 영상은 한 줄로 접혀 있다. 기록이 주인공 (FN-20) */}
+                  <VideoRow video={ex.video} onEdit={() => setVideoFor(ex)} />
+
                   {lastText && <p className="last">{lastText}</p>}
 
                   {rows.map((row) => (
@@ -432,6 +450,15 @@ export default function RoutineRunPage() {
           routineId={routineId}
           onPick={addExercise}
           onClose={() => setPickerOpen(false)}
+        />
+      )}
+
+      {videoFor && (
+        <VideoPicker
+          exerciseName={videoFor.name}
+          current={videoFor.video}
+          onSave={(v) => saveVideo(videoFor.id, v)}
+          onClose={() => setVideoFor(null)}
         />
       )}
     </>
