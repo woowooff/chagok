@@ -844,14 +844,20 @@ a {
      시트가 세로 flex라서, 내용이 길어지면 flex가 영상 칸부터 줄여버린다.
      폰처럼 화면이 짧을수록 심해서 「영상을 볼 방법이 없는」 상태가 됐다. */
   flex: none;
+  /* 🔒 안전장치 — 무슨 계산 실수를 해도 영상 칸이 사라지지는 않게.
+     같은 사고가 하루에 두 번 났다(납작해짐 → 아예 없어짐). */
+  min-height: 200px;
 }
 
-/* Shorts는 세로 영상이라 세로로 크게 (FN-25) */
+/* Shorts는 세로 영상이라 세로로 크게 (FN-25)
+   🐛 2026-08-11 — 여기서 `width: auto` + `margin-inline: auto` 를 같이 썼다가
+   영상이 통째로 사라졌다. 가로 여백을 auto 로 두면 flex 가 폭을 늘려주지 않아
+   폭이 0이 되고, 비율로 계산되는 높이도 0이 되어 아무것도 안 보인다.
+   → 폭을 숫자로 정해준다. 46vh × (16/9) ≒ 화면 높이의 82% */
 .player.vertical {
   aspect-ratio: 9 / 16;
-  max-height: 62vh;
+  width: min(100%, 46vh);
   margin-inline: auto;
-  width: auto;
 }
 
 .player iframe,

@@ -215,6 +215,10 @@ export default function VideoPicker({
                 void accept(t);
               }
             }}
+            // 폰 키보드의 「완료(엔터)」로도 넘어가게 — 확인 버튼을 못 찾는 일이 없도록
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && url.trim()) void accept(url);
+            }}
           />
           {error && <p className="err">{error}</p>}
           <button
