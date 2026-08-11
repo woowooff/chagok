@@ -1352,3 +1352,382 @@ a {
   font-weight: 400;
   color: var(--ink);
 }
+
+/* ── 눈바디 (FN-50~55) ─────────────────────── */
+
+.pills.seg {
+  margin-bottom: 6px;
+}
+
+.body-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.slot {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--hair);
+  border-radius: 12px;
+  background: var(--card);
+  overflow: hidden;
+  padding: 0;
+}
+
+.slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.slot-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: var(--ink-faint);
+}
+
+.slot-label {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  padding: 1px 9px;
+  border-radius: 999px;
+  background: rgba(255, 248, 234, 0.9);
+  font-size: 12px;
+}
+
+/* 촬영 화면 (겹쳐 보기) */
+.cam-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  max-width: var(--app-w);
+  margin: 0 auto;
+  background: #17110c;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px calc(20px + env(safe-area-inset-bottom));
+}
+
+.cam-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.cam-top b {
+  font-weight: 400;
+  font-size: 17px;
+}
+
+.cam-top button {
+  width: var(--tap);
+  height: var(--tap);
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 18px;
+}
+
+.cam-view {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+}
+
+.cam-view video,
+.cam-view .ghost {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 🔑 지난 사진이 흐리게 겹친다 — 이 실루엣에 몸을 맞춘다 */
+.cam-view .ghost {
+  pointer-events: none;
+  filter: grayscale(1) contrast(1.1);
+}
+
+.ghost-ctl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: #cbbca8;
+}
+
+.ghost-ctl input {
+  flex: 1;
+}
+
+.shutter {
+  width: 68px;
+  height: 68px;
+  margin: 14px auto 0;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shutter span {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fff;
+  display: block;
+}
+
+.shutter:disabled {
+  opacity: 0.4;
+}
+
+.cam-hint {
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: 12.5px;
+  color: #cbbca8;
+  line-height: 1.6;
+}
+
+.cam-blocked {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.cam-blocked .sub {
+  color: #cbbca8;
+  font-size: 13px;
+}
+
+/* 비교 */
+.cmp-row {
+  margin-top: 14px;
+}
+
+.cmp-cap {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.cmp-imgs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.cmp-cell {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--sunk, #f3e8d5);
+  border: 1px solid var(--hair);
+}
+
+.cmp-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cmp-none {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11.5px;
+  color: var(--ink-faint);
+}
+
+.diff {
+  margin: 16px 0;
+  text-align: center;
+  font-size: 17px;
+}
+
+/* ── 기록 달력 (FN-60~62) ──────────────────── */
+
+.cal-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.cal-head b {
+  font-weight: 400;
+  font-size: 17px;
+}
+
+.cal-head button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  color: var(--ink-soft);
+}
+
+.cal-count {
+  margin-left: auto;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.cal {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.cal-w {
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  padding-bottom: 4px;
+}
+
+.cal-d {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  min-height: 48px;
+  padding: 4px 0 3px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.cal-d .d {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+
+.cal-d.today .d {
+  color: var(--ink);
+}
+
+.cal-d.on {
+  border-color: var(--ink);
+  background: var(--card);
+}
+
+.cal-d .mk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  min-height: 20px;
+}
+
+.cal-d .acorn {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.cal-d .dots {
+  display: flex;
+  gap: 2px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  display: block;
+}
+
+.dot.meal {
+  background: var(--good);
+}
+.dot.body {
+  background: var(--sky);
+}
+
+/* 그날 상세 */
+.day {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hair);
+}
+
+.day h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.day-none {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--ink-faint);
+}
+
+.drow {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 4px 8px;
+  margin-bottom: 14px;
+  font-size: 13.5px;
+}
+
+.drow .ic {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.drow b {
+  font-weight: 400;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.drow p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.mealline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 !important;
+}
+
+.mealline img {
+  width: 34px;
+  height: 34px;
+  border-radius: 7px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
