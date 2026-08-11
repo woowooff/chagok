@@ -25,6 +25,24 @@ export function ChagokProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => setState(loadState()), []);
 
+  // 🔒 브라우저에게 "이 저장 내용은 함부로 지우지 말아달라"고 부탁한다.
+  //
+  // 왜 필요한가 — 로그인이 없어서 기록이 폰 안에만 있다. 그런데 브라우저는
+  // 공간이 모자라거나 오래 안 들어온 사이트의 저장 내용을 스스로 지운다.
+  // (특히 아이폰 사파리는 「7일 동안 안 들어간 사이트」의 내용을 지운다)
+  //
+  // ⚠️ 부탁일 뿐 보장은 아니다. 홈화면에 추가하면 승낙될 확률이 크게 오르고,
+  //    그래도 최후의 안전장치는 「내보내기」(FN-71)다.
+  useEffect(() => {
+    const s = typeof navigator !== "undefined" ? navigator.storage : undefined;
+    if (!s?.persist || !s.persisted) return;
+    s.persisted()
+      .then((already) => (already ? true : s.persist()))
+      .catch(() => {
+        /* 안 되는 브라우저도 있다. 앱은 그냥 돌아가야 한다 */
+      });
+  }, []);
+
   const update = useCallback((fn: (draft: ChagokState) => ChagokState) => {
     setState((prev) => {
       if (!prev) return prev;
