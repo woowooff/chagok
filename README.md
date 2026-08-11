@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 차곡 🌰
 
-## Getting Started
+> **루틴을 차곡차곡 쌓는 운동·식단·눈바디 기록 웹앱**
+> 루틴 하나 끝내면 도토리 하나 🌰
 
-First, run the development server:
+바이브코딩으로 만든 개인용 운동 기록 앱입니다.
+기존 앱(Hevy)에서 막히던 것 세 가지를 채우는 것이 목표였습니다.
+
+| Hevy에서 막힌 것 | 차곡의 답 |
+|---|---|
+| 운동 시연 영상을 **내가 고른 영상으로 못 바꾼다** | 유튜브 링크를 붙이고 **원하는 구간만** 잘라서 저장 |
+| 식단 기능이 **아예 없다** (칼로리 세기는 귀찮다) | 사진 한 장 → **굿 / 낫뱃 / 배드** 3단계 판정 |
+| 눈바디 사진이 **앨범에 흩어진다** | 지난 사진을 겹쳐 보며 같은 각도로 촬영 → 콜라주 비교 |
+
+---
+
+## 화면
+
+| 탭 | 하는 일 |
+|---|---|
+| 🌰 **루틴** | 오늘 할 루틴 하나를 누르면 운동이 세로로. 위에서 아래로 내려가며 기록 |
+| 🍚 **식단** | 밥이든 간식이든 찍기만. 시각·끼니 세기·식사/간식 구분은 앱이 알아서 |
+| 📸 **눈바디** | 앞·옆·뒤 세 장. 지난 사진이 흐리게 겹쳐 보여 각도가 맞는다 |
+| 📅 **기록** | 달력 하나에 전부. 루틴 한 날은 🌰, 식단·눈바디는 작은 점 |
+
+---
+
+## 만들면서 지킨 원칙
+
+> ### 🔴 "복잡한 건 안 쓰게 됨."
+> 이 앱이 실패하는 유일한 방법이다.
+
+1. **2번 안에 끝난다** — 앱을 열고 탭 2번 안에 기록·촬영 화면
+2. **입력창은 바로 뜬다** — "무엇을 추가할까요?" 같은 중간 화면 없음
+3. **빈칸을 미리 채운다** — 세트 추가하면 직전 값이 이미 들어있음. 그대로면 ✓ 하나로 끝
+4. **설정을 묻지 않는다** — 첫 실행 설문·목표 몸무게·프로필 없음
+5. **글자 대신 그림** — 설명문을 읽어야 아는 화면은 실패
+6. **강조는 하나만** — 진한 색은 「지금 고른 것」과 「주요 버튼」에만
+
+### 일부러 안 만든 것
+로그인 · 소셜 피드 · 칼로리 숫자 · 애플워치 연동 · AI 체형 점수 · 첫 실행 설문
+→ 자세한 이유는 [`PRD.md`](PRD.md) 6장
+
+---
+
+## 기술
+
+- **Next.js 16** (App Router) · TypeScript · 순수 CSS
+- **저장은 전부 브라우저 안** — 로그인 없음. 글자는 localStorage, 사진은 IndexedDB
+- **식단 판정**: Gemini (서버 라우트에서만 호출, 키는 화면 코드에 없음)
+- **유튜브 구간 재생**: 임베드의 시작·끝 지정
+
+### 🔒 사진 다루는 규칙
+- **눈바디 사진은 어떤 서버로도 보내지 않습니다.** 판정할 게 없으니 보낼 이유도 없습니다
+- 밥 사진만 판정을 위해 보내고, **저장은 폰 안에만** 합니다
+- 모든 사진은 저장 전에 자동으로 줄입니다 (긴 변 1080px, 200KB 내외)
+
+---
+
+## 문서
+
+이 저장소는 **코드보다 문서가 먼저** 만들어졌습니다.
+
+| 파일 | 내용 |
+|---|---|
+| [`PRD.md`](PRD.md) | 왜 만드는가 — 육하원칙, 설계 원칙, 안 만들 것 |
+| [`SPEC.md`](SPEC.md) | 무엇이 되면 완성인가 — 요구사항 50여 개 + 수용 기준 |
+| [`TASKS.md`](TASKS.md) | 어떤 순서로 만드는가 — M0~M5 |
+| `01_`·`02_` | 경쟁 앱 조사 (Hevy 혹평 80건 분석 등) |
+
+---
+
+## 직접 돌려보려면
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+식단 판정을 쓰려면 `.env.local` 에 Gemini 키가 필요합니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+GEMINI_API_KEY=여기에_키
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+키 없이도 나머지 기능(루틴·기록·영상·눈바디)은 전부 동작합니다.
