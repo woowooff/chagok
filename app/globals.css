@@ -1206,6 +1206,25 @@ a {
   line-height: 1;
 }
 
+/* 앨범은 보조 — 노란 강조는 화면당 하나뿐이라 조용한 줄로 (설계 원칙 6) */
+.album {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--tap);
+  margin-top: 8px;
+  border: 1px solid var(--hair);
+  border-radius: var(--r);
+  background: var(--card);
+  color: var(--ink-soft);
+  font-size: 14.5px;
+}
+
+.album:disabled {
+  color: var(--ink-faint);
+}
+
 .meal-list {
   list-style: none;
   margin: 18px 0 0;

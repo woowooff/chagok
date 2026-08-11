@@ -25,7 +25,8 @@ const JUNK_LABEL: Record<JunkRisk, string> = {
 
 export default function MealPage() {
   const { state, update } = useChagok();
-  const fileRef = useRef<HTMLInputElement>(null);
+  const camRef = useRef<HTMLInputElement>(null);
+  const albumRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
 
   const todayStr = today();
@@ -151,24 +152,38 @@ export default function MealPage() {
         </p>
       )}
 
+      {/* 찍기와 앨범을 나눈다 (2026-08-11 우경님: "앨범에서 고르기 선택이 없어")
+          하나로 두면 capture 때문에 카메라로 바로 가버리고,
+          capture 를 빼면 폰이 물어보는 창이 한 단계 더 생긴다 → 둘로 나누는 게 제일 적게 누른다 */}
       <input
-        ref={fileRef}
+        ref={camRef}
         type="file"
         accept="image/*"
         capture="environment"
         hidden
         onChange={onPick}
       />
+      <input ref={albumRef} type="file" accept="image/*" hidden onChange={onPick} />
+
       <button
         type="button"
         className="cam"
         disabled={busy}
-        onClick={() => fileRef.current?.click()}
+        onClick={() => camRef.current?.click()}
       >
         <span className="cam-ico" aria-hidden="true">
           📷
         </span>
-        {busy ? "판정하는 중…" : "사진 찍기 / 앨범에서 고르기"}
+        {busy ? "판정하는 중…" : "사진 찍기"}
+      </button>
+
+      <button
+        type="button"
+        className="album"
+        disabled={busy}
+        onClick={() => albumRef.current?.click()}
+      >
+        🖼 앨범에서 고르기
       </button>
 
       {todayMeals.length === 0 ? (
