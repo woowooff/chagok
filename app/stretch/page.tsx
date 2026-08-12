@@ -24,6 +24,9 @@ export default function StretchPage() {
 
   const [openId, setOpenId] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
+  // 🐛 2026-08-12 기본 제공 스트레칭(밴드·골반교정)은 영상이 비어 있는데 붙일 길이 없었다.
+  //    replaceVideo를 만들어놓고 화면에 연결을 안 해서, 눌러도 아무 일이 없었음.
+  const [editFor, setEditFor] = useState<Exercise | null>(null);
   // 재생을 시작한 시각 — 「했어요」를 누르면 그동안 흐른 시간이 기록된다
   const startedAt = useRef<number | null>(null);
 
@@ -194,6 +197,17 @@ export default function StretchPage() {
                       onClick={() => {
                         startedAt.current = null;
                         setOpenId(null);
+                        setEditFor(ex);
+                      }}
+                    >
+                      영상 바꾸기
+                    </button>
+                    <button
+                      type="button"
+                      className="ghost"
+                      onClick={() => {
+                        startedAt.current = null;
+                        setOpenId(null);
                       }}
                     >
                       닫기
@@ -205,7 +219,11 @@ export default function StretchPage() {
                   type="button"
                   className="st-face"
                   onClick={() => {
-                    if (!ex.video) return;
+                    // 영상이 없으면 「붙이는 창」을 연다. 막다른 길을 만들지 않는다
+                    if (!ex.video) {
+                      setEditFor(ex);
+                      return;
+                    }
                     startedAt.current = Date.now();
                     setOpenId(ex.id);
                   }}
@@ -216,7 +234,8 @@ export default function StretchPage() {
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={thumb} alt="" />
                     ) : (
-                      <span className="st-nothumb">영상 없음</span>
+                      // 「영상 없음」은 막힌 느낌을 준다. 누르면 된다고 말해준다
+                      <span className="st-nothumb">＋ 영상 붙이기</span>
                     )}
                     {len && <span className="st-len">{len}</span>}
                   </span>
@@ -256,6 +275,19 @@ export default function StretchPage() {
           current={null}
           onSave={addFromVideo}
           onClose={() => setAdding(false)}
+        />
+      )}
+
+      {/* 이미 있는 스트레칭에 영상을 붙이거나 갈아끼운다 (이름은 그대로 둔다) */}
+      {editFor && (
+        <VideoPicker
+          exerciseName={editFor.name}
+          current={editFor.video ?? null}
+          onSave={(v) => {
+            replaceVideo(editFor.id, v);
+            setEditFor(null);
+          }}
+          onClose={() => setEditFor(null)}
         />
       )}
     </>
