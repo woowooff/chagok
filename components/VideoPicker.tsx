@@ -6,6 +6,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { fmtClock, parseVideoUrl, platformLabel, youtubeThumb } from "@/lib/video";
+import { loadYouTubeApi, type YTPlayer } from "@/lib/yt";
 import type { Video } from "@/lib/types";
 
 type Props = {
@@ -15,40 +16,8 @@ type Props = {
   onClose: () => void;
 };
 
-/* 유튜브 재생기를 불러오는 준비 (지금 몇 초인지 물어보려면 필요하다) */
-declare global {
-  interface Window {
-    YT?: {
-      Player: new (el: HTMLElement, opts: Record<string, unknown>) => YTPlayer;
-    };
-    onYouTubeIframeAPIReady?: () => void;
-  }
-}
-type YTPlayer = {
-  getCurrentTime: () => number;
-  getDuration: () => number;
-  seekTo: (s: number, allow: boolean) => void;
-  pauseVideo: () => void;
-  destroy: () => void;
-};
-
-let apiLoading: Promise<void> | null = null;
-function loadYouTubeApi(): Promise<void> {
-  if (typeof window === "undefined") return Promise.resolve();
-  if (window.YT?.Player) return Promise.resolve();
-  if (apiLoading) return apiLoading;
-  apiLoading = new Promise<void>((resolve) => {
-    const prev = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => {
-      prev?.();
-      resolve();
-    };
-    const s = document.createElement("script");
-    s.src = "https://www.youtube.com/iframe_api";
-    document.head.appendChild(s);
-  });
-  return apiLoading;
-}
+/* 유튜브 재생기 불러오기는 `lib/yt.ts` 한 곳으로 모았다 (2026-08-13).
+   LoopPlayer(구간 반복)와 같은 스크립트를 쓰는데, 각자 부르면 두 번 뜬다 */
 
 export default function VideoPicker({
   exerciseName,

@@ -8,10 +8,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import LoopPlayer from "@/components/LoopPlayer";
 import VideoPicker from "@/components/VideoPicker";
 import { useChagok } from "@/lib/chagok-store";
-import { fmtClock, youtubeEmbedUrl, youtubeThumb } from "@/lib/video";
+import { fmtClock, youtubeThumb } from "@/lib/video";
+import { loadYouTubeApi } from "@/lib/yt";
 import { newId, today } from "@/lib/storage";
 import type { Exercise, Video } from "@/lib/types";
 
@@ -29,6 +31,11 @@ export default function StretchPage() {
   const [editFor, setEditFor] = useState<Exercise | null>(null);
   // 재생을 시작한 시각 — 「했어요」를 누르면 그동안 흐른 시간이 기록된다
   const startedAt = useRef<number | null>(null);
+
+  // ⏱ 재생기를 미리 받아둔다 (누른 다음 받아오면 자동재생이 막힌다 — VideoRow와 같은 이유)
+  useEffect(() => {
+    void loadYouTubeApi();
+  }, []);
 
   const items = useMemo(
     () => state.exercises.filter((e) => e.part === "스트레칭"),
@@ -206,17 +213,7 @@ export default function StretchPage() {
               )}
               {open && ex.video?.videoId ? (
                 <>
-                  <div
-                    className={`player ${ex.video.isShorts ? "vertical" : ""}`}
-                  >
-                    <iframe
-                      src={youtubeEmbedUrl(ex.video, { autoplay: true })}
-                      title={ex.name}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      referrerPolicy="strict-origin-when-cross-origin"
-                    />
-                  </div>
+                  <LoopPlayer video={ex.video} title={ex.name} />
                   <div className="st-actions">
                     <button
                       type="button"

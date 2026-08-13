@@ -5,8 +5,10 @@
 // 🔑 영상이 죽어도 기록은 절대 막지 않는다 — 헬스장에서 기록을 못 하면 그날이 통째로 날아간다.
 "use client";
 
-import { useState } from "react";
-import { fmtClock, platformLabel, youtubeEmbedUrl } from "@/lib/video";
+import { useEffect, useState } from "react";
+import LoopPlayer from "@/components/LoopPlayer";
+import { fmtClock, platformLabel } from "@/lib/video";
+import { loadYouTubeApi } from "@/lib/yt";
 import type { Video } from "@/lib/types";
 
 type Props = {
@@ -16,6 +18,12 @@ type Props = {
 
 export default function VideoRow({ video, onEdit }: Props) {
   const [open, setOpen] = useState(false);
+
+  // ⏱ 재생기를 미리 받아둔다. 누른 뒤에 받아오면 그 사이에 「손가락으로 눌렀다」는 신호가
+  //    풀려서 브라우저가 자동재생을 막는다 (= 눌러도 검은 화면).
+  useEffect(() => {
+    void loadYouTubeApi();
+  }, []);
 
   if (!video) {
     return (
@@ -68,14 +76,7 @@ export default function VideoRow({ video, onEdit }: Props) {
       </div>
 
       {open && isYoutube && (
-        <div className={`player ${video.isShorts ? "vertical" : ""}`}>
-          <iframe
-            src={youtubeEmbedUrl(video, { autoplay: true })}
-            title={video.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            referrerPolicy="strict-origin-when-cross-origin"
-          />
+        <LoopPlayer video={video} title={video.title}>
           {/* 삭제·비공개·퍼가기 금지 영상일 수 있다 (FN-28) */}
           <p className="vfallback">
             영상이 안 나오나요?{" "}
@@ -87,7 +88,7 @@ export default function VideoRow({ video, onEdit }: Props) {
               다시 붙이기
             </button>
           </p>
-        </div>
+        </LoopPlayer>
       )}
     </div>
   );

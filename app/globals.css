@@ -1732,6 +1732,28 @@ a {
   flex-shrink: 0;
 }
 
+/* ── 구간 반복 버튼 (2026-08-13) ────────────────────────────
+   ⚠️ 이름 겹침 확인함 — `.loop-btn` 은 이 파일에 처음 나온다
+   🔕 노란 강조는 쓰지 않는다. 화면당 강조 1개 규칙(NFR-12)을 지키려고
+      켜짐/꺼짐을 글자와 테두리 진하기로만 구분한다 */
+.loop-btn {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 9px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: none;
+  color: var(--ink-faint);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.loop-btn.on {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
 /* ── 삭제 (2026-08-13) ─────────────────────────────────────
    ⚠️ 이름 겹침 확인함 — .pick-line · .pick-del · .st-del · .del-row
       네 개 모두 이 파일에 처음 나온다 (.rt·.empty 사고 재발 방지)
