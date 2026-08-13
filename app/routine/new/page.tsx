@@ -107,13 +107,20 @@ export default function NewRoutinePage() {
       </button>
 
       <div className="bottom-cta">
+        {/* 🔴 2026-08-13 — 꺼진 버튼은 「왜 꺼졌는지」를 스스로 말해야 한다.
+            우경님: *"루틴이름을 치면 그다음 만들기 버튼도 비활성화... 이게 맞음?"*
+            만든 사람도 헷갈렸다면 화면이 잘못된 것이다. */}
         <button
           type="button"
           className="primary"
           disabled={!canSave}
           onClick={save}
         >
-          만들기
+          {canSave
+            ? "만들기"
+            : name.trim() === ""
+              ? "이름을 먼저 적어주세요"
+              : "운동을 담아야 만들 수 있어요"}
         </button>
       </div>
 
