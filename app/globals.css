@@ -1731,3 +1731,76 @@ a {
   object-fit: cover;
   flex-shrink: 0;
 }
+
+/* ── 삭제 (2026-08-13) ─────────────────────────────────────
+   ⚠️ 이름 겹침 확인함 — .pick-line · .pick-del · .st-del · .del-row
+      네 개 모두 이 파일에 처음 나온다 (.rt·.empty 사고 재발 방지)
+   🔕 삭제는 강조하지 않는다. 흐린 글씨로 두고, 누르면 한 번 물어본다 */
+
+/* 운동 목록 한 줄 = [고르기 버튼] + [✕] — 버튼 안에 버튼을 넣을 수 없어 감쌌다 */
+.pick-line {
+  display: flex;
+  align-items: center;
+}
+
+.pick-line .pick-row {
+  flex: 1;
+  min-width: 0;
+}
+
+.pick-del {
+  flex-shrink: 0;
+  width: 42px;
+  align-self: stretch;
+  border: none;
+  background: none;
+  color: var(--ink-faint);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.pick-del:active {
+  color: var(--bad);
+}
+
+/* 스트레칭 카드 우상단 ✕ (접혀 있을 때만 나온다) */
+.st-card {
+  position: relative;
+}
+
+.st-del {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--ink-faint);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.st-del:active {
+  color: var(--bad);
+}
+
+/* 「이 루틴에서 빼기」처럼 조용히 놓이는 삭제 줄 */
+.del-row {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  border: none;
+  background: none;
+  color: var(--ink-faint);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.del-row:active {
+  color: var(--bad);
+}

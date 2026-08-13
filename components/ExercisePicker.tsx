@@ -10,7 +10,7 @@
 import { useMemo, useState } from "react";
 import { useChagok } from "@/lib/chagok-store";
 import { mainPartOf } from "@/lib/logic";
-import { PARTS, type LogType, type Part } from "@/lib/types";
+import { PARTS, type Exercise, type LogType, type Part } from "@/lib/types";
 
 const LOG_LABEL: Record<LogType, string> = {
   weight_reps: "무게×횟수",
@@ -82,6 +82,36 @@ export default function ExercisePicker({
     onPick(name);
     setQ("");
     setMaking(false);
+  }
+
+  /** 운동 목록에서 아예 지우기 (기본 제공 61종도 지울 수 있다) */
+  function removeExercise(ex: Exercise) {
+    const inRoutines = state.routines.filter((r) =>
+      r.exerciseIds.includes(ex.id)
+    );
+    const logged = state.sessions.filter((s) =>
+      s.sets.some((x) => x.exerciseId === ex.id)
+    ).length;
+
+    const lines = [`「${ex.name}」을(를) 목록에서 지울까요?`];
+    if (inRoutines.length > 0) {
+      lines.push(
+        `루틴 ${inRoutines.map((r) => `「${r.name}」`).join(" ")}에서도 빠져요.`
+      );
+    }
+    if (logged > 0) {
+      lines.push(`지난 기록 ${logged}개도 기록 탭에서 안 보이게 돼요.`);
+    }
+    if (!window.confirm(lines.join("\n"))) return;
+
+    update((s) => ({
+      ...s,
+      exercises: s.exercises.filter((e) => e.id !== ex.id),
+      routines: s.routines.map((r) => ({
+        ...r,
+        exerciseIds: r.exerciseIds.filter((id) => id !== ex.id),
+      })),
+    }));
   }
 
   return (
@@ -172,16 +202,28 @@ export default function ExercisePicker({
         {list.map((ex) => {
           const already = pickedIds.includes(ex.id);
           return (
-            <button
-              key={ex.id}
-              type="button"
-              className={`pick-row ${already ? "already" : ""}`}
-              disabled={already}
-              onClick={() => onPick(ex.id)}
-            >
-              <span className="nm">{ex.name}</span>
-              <span className="mark">{already ? "✓ 담김" : "＋"}</span>
-            </button>
+            <div className="pick-line" key={ex.id}>
+              <button
+                type="button"
+                className={`pick-row ${already ? "already" : ""}`}
+                disabled={already}
+                onClick={() => onPick(ex.id)}
+              >
+                <span className="nm">{ex.name}</span>
+                <span className="mark">{already ? "✓ 담김" : "＋"}</span>
+              </button>
+              {/* 이미 담은 건 지우지 않는다 — 담은 목록과 어긋나기 때문 */}
+              {!already && (
+                <button
+                  type="button"
+                  className="pick-del"
+                  aria-label={`${ex.name} 삭제`}
+                  onClick={() => removeExercise(ex)}
+                >
+                  ✕
+                </button>
+              )}
+            </div>
           );
         })}
 

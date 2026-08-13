@@ -228,6 +228,25 @@ export default function RoutineRunPage() {
     }));
   }
 
+  /** 이 루틴에서만 뺀다 — 운동 목록과 지난 기록은 그대로 둔다 */
+  function removeFromRoutine(ex: Exercise) {
+    if (
+      !window.confirm(
+        `「${ex.name}」을(를) 이 루틴에서 뺄까요?\n운동 목록과 지난 기록은 그대로 남아요.`
+      )
+    )
+      return;
+    setOpenId(null);
+    update((s) => ({
+      ...s,
+      routines: s.routines.map((r) =>
+        r.id === routineId
+          ? { ...r, exerciseIds: r.exerciseIds.filter((id) => id !== ex.id) }
+          : r
+      ),
+    }));
+  }
+
   /** T-17 루틴 끝내기 → 도토리 하나 */
   function finish() {
     if (!session) return;
@@ -417,6 +436,14 @@ export default function RoutineRunPage() {
                     onClick={() => addSet(ex)}
                   >
                     ＋ 세트 추가
+                  </button>
+
+                  <button
+                    type="button"
+                    className="del-row"
+                    onClick={() => removeFromRoutine(ex)}
+                  >
+                    이 루틴에서 빼기
                   </button>
                 </div>
               )}

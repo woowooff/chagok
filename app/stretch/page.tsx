@@ -73,6 +73,29 @@ export default function StretchPage() {
     }));
   }
 
+  /** 스트레칭 지우기 — 기본 제공(밴드·골반교정)도 지울 수 있다 */
+  function removeStretch(ex: Exercise) {
+    const logged = state.sessions.filter((s) =>
+      s.sets.some((x) => x.exerciseId === ex.id)
+    ).length;
+    const lines = [`「${ex.name}」을(를) 지울까요?`];
+    if (logged > 0) {
+      lines.push(`지난 기록 ${logged}개도 기록 탭에서 안 보이게 돼요.`);
+    }
+    if (!window.confirm(lines.join("\n"))) return;
+
+    if (openId === ex.id) setOpenId(null);
+    update((s) => ({
+      ...s,
+      exercises: s.exercises.filter((e) => e.id !== ex.id),
+      // 어느 루틴에 담겨 있었다면 거기서도 같이 뺀다 (없는 운동이 남지 않게)
+      routines: s.routines.map((r) => ({
+        ...r,
+        exerciseIds: r.exerciseIds.filter((id) => id !== ex.id),
+      })),
+    }));
+  }
+
   function replaceVideo(exId: string, video: Video | null) {
     update((s) => ({
       ...s,
@@ -170,6 +193,17 @@ export default function StretchPage() {
 
           return (
             <div key={ex.id} className={`st-card ${open ? "open" : ""}`}>
+              {/* 접혀 있을 때만 ✕ — 영상을 보는 중엔 눌릴 일이 없게 */}
+              {!open && (
+                <button
+                  type="button"
+                  className="st-del"
+                  aria-label={`${ex.name} 삭제`}
+                  onClick={() => removeStretch(ex)}
+                >
+                  ✕
+                </button>
+              )}
               {open && ex.video?.videoId ? (
                 <>
                   <div
