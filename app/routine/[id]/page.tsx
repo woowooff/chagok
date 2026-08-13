@@ -452,6 +452,18 @@ export default function RoutineRunPage() {
         })}
       </ul>
 
+      {/* 이름만 먼저 만든 루틴은 여기로 들어온다 (②). 빈 화면에서 막히지 않게 */}
+      {exercises.length === 0 && (
+        <p className="empty">
+          <span className="big" aria-hidden="true">
+            🌰
+          </span>
+          「{routine.name}」에 담을 운동을 골라주세요.
+          <br />
+          아래 <b>＋ 운동 추가</b>를 누르면 목록이 나와요.
+        </p>
+      )}
+
       <button
         type="button"
         className="add-row"

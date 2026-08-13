@@ -16,7 +16,10 @@ export default function NewRoutinePage() {
   const [pickerOpen, setPickerOpen] = useState(false);
   const [dragFrom, setDragFrom] = useState<number | null>(null);
 
-  const canSave = name.trim() !== "" && picked.length > 0;
+  // 🔑 2026-08-13 ② — 이름만 있으면 만들어진다. 운동은 만든 뒤에 담아도 된다.
+  //    (전에는 「이름 + 운동 1개 이상」이라, 이름만 친 상태에서 만들기가 꺼져 있었다.
+  //     우경님: *"루틴이름을 치면 그다음 만들기 버튼도 비활성화... 이게 맞음?"*)
+  const canSave = name.trim() !== "";
 
   function move(from: number, to: number) {
     if (to < 0 || to >= picked.length || from === to) return;
@@ -44,7 +47,10 @@ export default function NewRoutinePage() {
         },
       ],
     }));
-    router.push("/");
+    // 운동을 아직 안 담았으면 담는 자리로 바로 데려간다 (홈으로 튕기지 않는다)
+    router.push(
+      picked.length > 0 ? "/" : `/routine/${encodeURIComponent(id)}`
+    );
   }
 
   return (
@@ -107,20 +113,15 @@ export default function NewRoutinePage() {
       </button>
 
       <div className="bottom-cta">
-        {/* 🔴 2026-08-13 — 꺼진 버튼은 「왜 꺼졌는지」를 스스로 말해야 한다.
-            우경님: *"루틴이름을 치면 그다음 만들기 버튼도 비활성화... 이게 맞음?"*
-            만든 사람도 헷갈렸다면 화면이 잘못된 것이다. */}
+        {/* 꺼져 있을 땐 「왜 꺼졌는지」를 버튼이 스스로 말한다.
+            이제 막히는 경우는 「이름이 비었을 때」 하나뿐이다 */}
         <button
           type="button"
           className="primary"
           disabled={!canSave}
           onClick={save}
         >
-          {canSave
-            ? "만들기"
-            : name.trim() === ""
-              ? "이름을 먼저 적어주세요"
-              : "운동을 담아야 만들 수 있어요"}
+          {canSave ? "만들기" : "이름을 먼저 적어주세요"}
         </button>
       </div>
 

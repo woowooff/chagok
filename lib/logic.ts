@@ -18,7 +18,12 @@ export function pickTodayRoutineId(
   todayStr: string
 ): string | null {
   // 오늘 이미 끝낸 루틴은 빼고 → 그 다음으로 오래된 것을 추천
-  const candidates = routines.filter((r) => r.lastDoneAt !== todayStr);
+  // 🔴 2026-08-13 — 운동이 하나도 없는 루틴은 후보에서 뺀다.
+  //    이름만 먼저 만들 수 있게 바꾼 뒤로(②), 빈 루틴이 「한 번도 안 함」이라
+  //    1순위로 올라와 홈에서 강조돼 버렸다. 할 수 있는 게 없는데 강조되면 안 된다.
+  const candidates = routines.filter(
+    (r) => r.lastDoneAt !== todayStr && r.exerciseIds.length > 0
+  );
   const pool = candidates.length > 0 ? candidates : [];
   if (pool.length === 0) return null;
 
@@ -187,6 +192,8 @@ export function fmtDuration(sec: number | null): string {
 
 /** 홈 줄에 붙는 요약: `운동 4개 · 지난번 8/8 · 42분` (FN-04) */
 export function routineSummary(r: Routine): string {
+  // 「운동 0개」는 고장난 것처럼 보인다. 다음에 뭘 하면 되는지 말해준다
+  if (r.exerciseIds.length === 0) return "운동을 담아주세요";
   const parts = [`운동 ${r.exerciseIds.length}개`];
   if (r.lastSetsDone) parts.push(`지난번 ${r.lastSetsDone}`);
   if (r.lastDurationSec) parts.push(fmtDuration(r.lastDurationSec));
